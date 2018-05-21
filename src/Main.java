@@ -14,7 +14,7 @@ public class Main {
 		String[] input = reader.readLine().split(" ");
 		int width = Integer.parseInt(input[0]);
 		int height = Integer.parseInt(input[1]);
-		Maze jack = new MazeClass();
+		Maze jack = new MazeClass(width, height);
 		
 		for(int i = 0; i<height;i++) {
 			input = reader.readLine().split(" ");
