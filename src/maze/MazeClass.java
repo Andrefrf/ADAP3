@@ -3,6 +3,11 @@
  */
 package maze;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
+
 /**
  * @author Andre Ferreira, 45242
  * @author Andre Wemans, 48432
@@ -12,9 +17,13 @@ public class MazeClass implements Maze {
 	
 	//INSTANCE VARIABLES
 	private int[][] map;
+	private int height;
+	private int width;
 
 	public MazeClass(int height, int width) {
 		map = new int[height][width];
+		this.height = height;
+		this.width = width;
 	}
 
 	/*
@@ -42,7 +51,11 @@ public class MazeClass implements Maze {
 	 */
 	@Override
 	public int solve() {
-		// TODO Auto-generated method stub
+		State initial = new StateClass(0, 0, 0, 0);
+		Queue<State> search = new LinkedList<State>();
+		search.add(initial);
+		Map<Integer, State> visited = new HashMap(height * width);
+		
 		return 0;
 	}
 
