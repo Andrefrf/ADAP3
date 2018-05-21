@@ -2,6 +2,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import maze.Maze;
+import maze.MazeClass;
+
 public class Main {
 
 	public static void main(String[] args) throws IOException {
@@ -11,18 +14,19 @@ public class Main {
 		String[] input = reader.readLine().split(" ");
 		int width = Integer.parseInt(input[0]);
 		int height = Integer.parseInt(input[1]);
+		Maze jack = new MazeClass();
 		
 		for(int i = 0; i<height;i++) {
 			input = reader.readLine().split(" ");
 			for(int h = 0;h<width;h++) {
 				if(input[h].equals("*")) {
-					addLamp();
+					jack.addLamp();
 				}
 				else if(input[h].equals("0")) {
-					addEmpty();
+					jack.addEmpty();
 				}
 				else {
-					darkLantern();
+					jack.darkLantern();
 				}
 			}
 		}
