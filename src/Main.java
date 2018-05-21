@@ -14,21 +14,20 @@ public class Main {
 		String[] input = reader.readLine().split(" ");
 		int width = Integer.parseInt(input[0]);
 		int height = Integer.parseInt(input[1]);
-		Maze jack = new MazeClass(width, height);
+		Maze jack = new MazeClass(height, width);
 		
 		for(int i = 0; i<height;i++) {
 			input = reader.readLine().split(" ");
 			for(int h = 0;h<width;h++) {
 				if(input[h].equals("*")) {
-					jack.addLamp();
+					jack.addLamp(i, h);
 				}
-				else if(input[h].equals("0")) {
-					jack.addEmpty();
-				}
-				else {
-					jack.darkLantern();
+				else if (!input[h].equals("0")) {
+					jack.darkLantern(i, h, Integer.parseInt(input[h]));
 				}
 			}
 		}
+		
+		jack.solve();
 	}
 }
