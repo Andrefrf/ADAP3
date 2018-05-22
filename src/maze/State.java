@@ -39,5 +39,12 @@ public interface State {
 	 * @return The lantern capacity
 	 */
 	int getCapacity();
+	
+	/**
+	 * Adds a vector to the state position returning the resulting point
+	 * @param vector The vector to be added
+	 * @return The resulting point of adding the state position with the vector 
+	 */
+	Point addVector(Point vector);
 
 }

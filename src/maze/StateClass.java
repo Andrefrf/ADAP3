@@ -12,15 +12,17 @@ public class StateClass implements State {
 	
 	//INSTANCE VARIABLES
 	private int id;
-	private int xx;
-	private int yy;
+	//private int xx;
+	//private int yy;
 	private int capacity;
 	private int length;
+	private Point position;
 
 	public StateClass(int x, int y, int capacity, int length) {
 		id = capacity * 10000 + x * 100 + y;
-		xx = x;
-		yy = y;
+		position = new PointClass(x, y);
+		//xx = x;
+		//yy = y;
 		this.capacity = capacity;
 		this.length = length;
 	}
@@ -48,7 +50,7 @@ public class StateClass implements State {
 	@Override
 	public int getX() {
 		
-		return xx;
+		return position.getX();
 	}
 
 	/*
@@ -58,7 +60,7 @@ public class StateClass implements State {
 	@Override
 	public int getY() {
 		
-		return yy;
+		return position.getY();
 	}
 
 	/*
@@ -69,6 +71,16 @@ public class StateClass implements State {
 	public int getCapacity() {
 		
 		return capacity;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see maze.State#addVector(maze.Point)
+	 */
+	@Override
+	public Point addVector(Point vector) {
+		
+		return position.addVector(vector);
 	}
 
 }
