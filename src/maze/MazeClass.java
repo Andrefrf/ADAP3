@@ -15,6 +15,10 @@ import java.util.Queue;
  */
 public class MazeClass implements Maze {
 	
+	//CONSTANTS
+	Point[] neighborers = {new PointClass(-1, 0), new PointClass(1, 0), new PointClass(0, -1),
+			new PointClass(0, 1)};
+	
 	//INSTANCE VARIABLES
 	private int[][] map;
 	private int height;
@@ -79,7 +83,7 @@ public class MazeClass implements Maze {
 		
 		return -1;
 	}
-
+	
 	/**
 	 * Computes the reachable neighborers states given the current state. It adds the new states
 	 * to the queue. If one of the new states is the goal state it returns it.
@@ -88,56 +92,101 @@ public class MazeClass implements Maze {
 	 * @return The goal state in case it is produced, null otherwise
 	 */
 	private State computeNeighborers(State state, Queue<State> search) {
-		
-		boolean lamp, nextLamp;;
-		int x;
-		int y;
+		boolean lampAtPosition, isLighted;
 		State newState;
 		int capacity, newCapacity;
 		int length;
-		x = state.getX();
-		y = state.getY();
+		Point newPositon;
+		int newX, newY;
+		
 		capacity = state.getCapacity();
 		length = state.getLength();
-		lamp = map[y][x] == -1;
+		lampAtPosition = map[state.getY()][state.getX()] == -1;
 		
 		//Finds next possible states and adds them to the queue
-		//Gather horizontal neighbors
-		
-		for (int i = -1; i <= 1; i = i + 2) {
-			//If the neighbors are inside the map
-			if ((x + i) >=0 && (x + i) < width) {
-				nextLamp = lamp || (map[y][x + i] == -1);
-				//If there is light to travel to neighbor
-				if (nextLamp || capacity > 0) {
-					//If it was using the lantern
-					newCapacity = (!nextLamp) ? (capacity - 1) : capacity;
-					newState = new StateClass(x + i, y, Math.max(newCapacity, map[y][x + i]), length + 1);
+		for (Point vector : neighborers) {
+			newPositon = state.addVector(vector);
+			newX = newPositon.getX();
+			newY = newPositon.getY();
+			if (newPositon.isInSide(width, height)) {
+				//Check if there is a lamp to cross to next point
+				isLighted = lampAtPosition || (map[newY][newX] == -1);
+				//If there is a lamp or jack has a lantern
+				if(isLighted || capacity > 0) {
+					//It the crossing was using a lantern reduces the capacity
+					newCapacity = (!isLighted) ? (capacity - 1) : capacity;
+					//Creates the new state at the newPosition
+					newState = new StateClass(newX, newY, newCapacity, length + 1);
+					//If the new state is at the goal position returns the state
 					if (isGoal(newState))
 						return newState;
+					//If it isn't adds it to the queue
 					search.add(newState);
 				}
 			}
 		}
 		
-		//Gather vertical neighbors 
-		for (int i = -1; i <= 1; i = i + 2) {
-			//If the neighbors are inside the map
-			if ((y + i) >=0 && (y + i) < height) {
-				nextLamp = lamp || (map[y + i][x] == -1);
-				//If there is light to travel to neighbor
-				if (nextLamp || capacity > 0) {
-					//If it was using the lantern
-					newCapacity = (!nextLamp) ? (capacity - 1) : capacity;
-					newState = new StateClass(x, y + i, Math.max(newCapacity, map[y + i][x]), length + 1);
-					if (isGoal(newState))
-						return newState;
-					search.add(newState);
-				}
-			}
-		}
 		return null;
 	}
+
+	/**
+	 * Computes the reachable neighborers states given the current state. It adds the new states
+	 * to the queue. If one of the new states is the goal state it returns it.
+	 * @param state The current state to which look for the neighborers states
+	 * @param search The queue of states to search
+	 * @return The goal state in case it is produced, null otherwise
+	 */
+//	private State computeNeighborers(State state, Queue<State> search) {
+//		
+//		boolean lamp, nextLamp;;
+//		int x;
+//		int y;
+//		State newState;
+//		int capacity, newCapacity;
+//		int length;
+//		x = state.getX();
+//		y = state.getY();
+//		capacity = state.getCapacity();
+//		length = state.getLength();
+//		lamp = map[y][x] == -1;
+//		
+//		//Finds next possible states and adds them to the queue
+//		//Gather horizontal neighbors
+//		
+//		for (int i = -1; i <= 1; i = i + 2) {
+//			//If the neighbors are inside the map
+//			if ((x + i) >=0 && (x + i) < width) {
+//				nextLamp = lamp || (map[y][x + i] == -1);
+//				//If there is light to travel to neighbor
+//				if (nextLamp || capacity > 0) {
+//					//If it was using the lantern
+//					newCapacity = (!nextLamp) ? (capacity - 1) : capacity;
+//					newState = new StateClass(x + i, y, Math.max(newCapacity, map[y][x + i]), length + 1);
+//					if (isGoal(newState))
+//						return newState;
+//					search.add(newState);
+//				}
+//			}
+//		}
+//		
+//		//Gather vertical neighbors 
+//		for (int i = -1; i <= 1; i = i + 2) {
+//			//If the neighbors are inside the map
+//			if ((y + i) >=0 && (y + i) < height) {
+//				nextLamp = lamp || (map[y + i][x] == -1);
+//				//If there is light to travel to neighbor
+//				if (nextLamp || capacity > 0) {
+//					//If it was using the lantern
+//					newCapacity = (!nextLamp) ? (capacity - 1) : capacity;
+//					newState = new StateClass(x, y + i, Math.max(newCapacity, map[y + i][x]), length + 1);
+//					if (isGoal(newState))
+//						return newState;
+//					search.add(newState);
+//				}
+//			}
+//		}
+//		return null;
+//	}
 
 	/**
 	 * Checks if a given state is the goal state

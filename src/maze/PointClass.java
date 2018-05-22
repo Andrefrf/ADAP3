@@ -46,4 +46,14 @@ public class PointClass implements Point {
 		return new PointClass(this.x + vector.getX(), this.y + vector.getY());
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see maze.Point#isInSide(int, int)
+	 */
+	@Override
+	public boolean isInSide(int width, int height) {
+		
+		return (this.x >= 0 && this.x < width && this.y >= 0 && this.y < height);
+	}
+
 }
