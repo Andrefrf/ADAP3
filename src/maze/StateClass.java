@@ -17,7 +17,7 @@ public class StateClass implements State {
 	private int capacity;
 	private int length;
 
-	public StateClass(int x, int y, int capcity, int length) {
+	public StateClass(int x, int y, int capacity, int length) {
 		id = capacity * 10000 + x * 100 + y;
 		xx = x;
 		yy = y;

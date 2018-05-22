@@ -67,10 +67,10 @@ public class MazeClass implements Maze {
 		while (!search.isEmpty() && !found) {
 			//Takes next element in queue
 			state = search.poll();
-			visited.put(state.getID(), state);
 			
 			//If it wasn't visited before
 			if (!visited.containsKey(state.getID())) {
+				visited.put(state.getID(), state);
 				goalState = computeNeighborers(state, search);
 				if (goalState != null)
 					return goalState.getLength();
@@ -91,30 +91,29 @@ public class MazeClass implements Maze {
 	 * @return The goal state in case it is produced, null otherwise
 	 */
 	private State computeNeighborers(State state, Queue<State> search) {
-		boolean lamp;
+		boolean lamp, nextLamp;;
 		int x;
 		int y;
 		State newState;
-		int capacity;
+		int capacity, newCapacity;
 		int length;
 		x = state.getX();
 		y = state.getY();
-		lamp = map[y][x] == -1;
 		capacity = state.getCapacity();
 		length = state.getLength();
+		lamp = map[y][x] == -1;
 		//Finds next possible states and adds them to the queue
-		//Horizontal neighbors 
+		//Horizontal neighbors
+		
 		for (int i = -1; i <= 1; i = i + 2) {
 			//If the neighbors are inside the map
 			if ((x + i) >=0 && (x + i) < width) {
-				lamp = lamp || (map[y][x + i] == -1);
+				nextLamp = lamp || (map[y][x + i] == -1);
 				//If there is light to travel to neighbor
-				if (lamp || capacity > 0) {
+				if (nextLamp || capacity > 0) {
 					//If it was using the lantern
-					if (!lamp) {
-						capacity--;
-					}
-					newState = new StateClass(x + i, y, Math.max(capacity, map[y][x + i]), length++);
+					newCapacity = (!nextLamp) ? (capacity - 1) : capacity;
+					newState = new StateClass(x + i, y, Math.max(capacity, map[y][x + i]), length + 1);
 					if (isGoal(newState))
 						return newState;
 					search.add(newState);
@@ -125,14 +124,12 @@ public class MazeClass implements Maze {
 		for (int i = -1; i <= 1; i = i + 2) {
 			//If the neighbors are inside the map
 			if ((y + i) >=0 && (y + i) < height) {
-				lamp = lamp || (map[y + i][x] == -1);
+				nextLamp = lamp || (map[y + i][x] == -1);
 				//If there is light to travel to neighbor
-				if (lamp || capacity > 0) {
+				if (nextLamp || capacity > 0) {
 					//If it was using the lantern
-					if (!lamp) {
-						capacity--;
-					}
-					newState = new StateClass(x, y + i, Math.max(capacity, map[y + i][x]), length++);
+					newCapacity = (!nextLamp) ? (capacity - 1) : capacity;
+					newState = new StateClass(x, y + i, Math.max(capacity, map[y + i][x]), length + 1);
 					if (isGoal(newState))
 						return newState;
 					search.add(newState);

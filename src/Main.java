@@ -28,6 +28,6 @@ public class Main {
 			}
 		}
 		
-		jack.solve();
+		System.out.println(jack.solve());
 	}
 }
