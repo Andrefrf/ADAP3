@@ -68,17 +68,14 @@ public class MazeClass implements Maze {
 			//Takes next element in queue
 			state = search.poll();
 			
-			//If it wasn't visited before
-			if (!visited.containsKey(state.getID())) {
-				visited.put(state.getID(), state);
+			//If it wasn't visited before add to visited and get vertical and horizontal neighbours
+			if (visited.putIfAbsent(state.getID(), state) == null){
 				goalState = computeNeighborers(state, search);
-				if (goalState != null)
+				if(goalState != null)
 					return goalState.getLength();
 			}
 			
 		}
-		
-		
 		
 		return -1;
 	}
@@ -91,6 +88,7 @@ public class MazeClass implements Maze {
 	 * @return The goal state in case it is produced, null otherwise
 	 */
 	private State computeNeighborers(State state, Queue<State> search) {
+		
 		boolean lamp, nextLamp;;
 		int x;
 		int y;
@@ -102,8 +100,9 @@ public class MazeClass implements Maze {
 		capacity = state.getCapacity();
 		length = state.getLength();
 		lamp = map[y][x] == -1;
+		
 		//Finds next possible states and adds them to the queue
-		//Horizontal neighbors
+		//Gather horizontal neighbors
 		
 		for (int i = -1; i <= 1; i = i + 2) {
 			//If the neighbors are inside the map
@@ -120,7 +119,8 @@ public class MazeClass implements Maze {
 				}
 			}
 		}
-		//Vertical neighbors 
+		
+		//Gather vertical neighbors 
 		for (int i = -1; i <= 1; i = i + 2) {
 			//If the neighbors are inside the map
 			if ((y + i) >=0 && (y + i) < height) {
@@ -136,7 +136,6 @@ public class MazeClass implements Maze {
 				}
 			}
 		}
-		
 		return null;
 	}
 
