@@ -116,7 +116,7 @@ public class MazeClass implements Maze {
 					//It the crossing was using a lantern reduces the capacity
 					newCapacity = (!isLighted) ? (capacity - 1) : capacity;
 					//Creates the new state at the newPosition
-					newState = new StateClass(newX, newY, newCapacity, length + 1);
+					newState = new StateClass(newX, newY, Math.max(newCapacity, map[newY][newX]), length + 1);
 					//If the new state is at the goal position returns the state
 					if (isGoal(newState))
 						return newState;
