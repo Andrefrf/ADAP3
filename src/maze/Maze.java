@@ -27,7 +27,7 @@ public interface Maze {
 
 	/**
 	 * Gets the shortest path from Jack's work to Jack's home
-	 * @return The shortest path from Jack's work to Jack's home
+	 * @return The shortest path from Jack's work to Jack's home, or -1 if it can't find a path
 	 */
 	int solve();
 

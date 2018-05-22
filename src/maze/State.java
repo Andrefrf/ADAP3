@@ -21,5 +21,23 @@ public interface State {
 	 * @return The path length taken to reach the current state
 	 */
 	int getLength();
+	
+	/**
+	 * Get the state x coordinate
+	 * @return State x coordinate
+	 */
+	int getX();
+	
+	/**
+	 * Get the state y coordinate
+	 * @return State y coordinate
+	 */
+	int getY();
+	
+	/**
+	 * Get the lantern capacity
+	 * @return The lantern capacity
+	 */
+	int getCapacity();
 
 }

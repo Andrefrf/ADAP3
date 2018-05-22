@@ -41,4 +41,34 @@ public class StateClass implements State {
 		return length;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see maze.State#getX()
+	 */
+	@Override
+	public int getX() {
+		
+		return xx;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see maze.State#getY()
+	 */
+	@Override
+	public int getY() {
+		
+		return yy;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see maze.State#getCapacity()
+	 */
+	@Override
+	public int getCapacity() {
+		
+		return capacity;
+	}
+
 }
