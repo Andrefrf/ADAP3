@@ -113,14 +113,14 @@ public class MazeClass implements Maze {
 				if (nextLamp || capacity > 0) {
 					//If it was using the lantern
 					newCapacity = (!nextLamp) ? (capacity - 1) : capacity;
-					newState = new StateClass(x + i, y, Math.max(capacity, map[y][x + i]), length + 1);
+					newState = new StateClass(x + i, y, Math.max(newCapacity, map[y][x + i]), length + 1);
 					if (isGoal(newState))
 						return newState;
 					search.add(newState);
 				}
 			}
 		}
-		//Horizontal neighbors 
+		//Vertical neighbors 
 		for (int i = -1; i <= 1; i = i + 2) {
 			//If the neighbors are inside the map
 			if ((y + i) >=0 && (y + i) < height) {
@@ -129,7 +129,7 @@ public class MazeClass implements Maze {
 				if (nextLamp || capacity > 0) {
 					//If it was using the lantern
 					newCapacity = (!nextLamp) ? (capacity - 1) : capacity;
-					newState = new StateClass(x, y + i, Math.max(capacity, map[y + i][x]), length + 1);
+					newState = new StateClass(x, y + i, Math.max(newCapacity, map[y + i][x]), length + 1);
 					if (isGoal(newState))
 						return newState;
 					search.add(newState);
