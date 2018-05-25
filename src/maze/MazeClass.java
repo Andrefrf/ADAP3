@@ -72,7 +72,7 @@ public class MazeClass implements Maze {
 			//Takes next element in queue
 			state = search.poll();
 			
-			//If it wasn't visited before add to visited and get vertical and horizontal neighbours
+			//If it wasn't visited before add to visited and get vertical and horizontal neighbors
 			if (visited.putIfAbsent(state.getID(), state) == null){
 				goalState = computeNeighborers(state, search);
 				if(goalState != null)
