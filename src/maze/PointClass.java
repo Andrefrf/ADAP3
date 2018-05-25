@@ -4,6 +4,10 @@
 package maze;
 
 /**
+ * Class for defining points in the map. Implements the Point interface.
+ * 
+ * The constructor receives the X and Y coordinates.
+ * 
  * @author Andre Ferreira, 45242
  * @author Andre Wemans, 48432
  *
