@@ -4,6 +4,12 @@
 package maze;
 
 /**
+ * Class for the search states implements the State interface.
+ * The constructor receives the state position coordinates, the
+ * lantern capacity and the length taken to reach the current state.
+ * The id is computing to ensure the all states with the same coordinates
+ * and lantern capacity have the same id and different if otherwise.
+ * 
  * @author Andre Ferreira, 45242
  * @author Andre Wemans, 48432
  *

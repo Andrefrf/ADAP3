@@ -4,6 +4,9 @@
 package maze;
 
 /**
+ * Interface for the classes which receive the problem data from the main 
+ * and computes the result to send to user.
+ * 
  * @author Andre Ferreira, 45242
  * @author Andre Wemans, 48432
  *

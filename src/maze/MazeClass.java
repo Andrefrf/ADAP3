@@ -9,6 +9,14 @@ import java.util.Map;
 import java.util.Queue;
 
 /**
+ * Class to solve the Jack-o'-Lantern problem. Implements the Maze interface.
+ * It receives the width and height of the problem map in the constructor  
+ * and each lamp and lantern position individually.
+ * Computes the shortest length path from the top left corner to the bottom
+ * right corner through paths lighted by lamps or using portable lanterns.
+ * 
+ * Uses a breadth first local search algorithm.
+ * 
  * @author Andre Ferreira, 45242
  * @author Andre Wemans, 48432
  *

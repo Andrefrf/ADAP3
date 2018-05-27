@@ -4,6 +4,8 @@
 package maze;
 
 /**
+ * Interface for objects representing points in the map.
+ * 
  * @author Andre Ferreira, 45242
  * @author Andre Wemans, 48432
  *

@@ -4,6 +4,8 @@
 package maze;
 
 /**
+ * Interface for objects representing the search states.
+ * 
  * @author Andre Ferreira, 45242
  * @author Andre Wemans, 48432
  *
